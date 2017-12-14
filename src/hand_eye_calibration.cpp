@@ -365,7 +365,6 @@ bool OutputPoses(const std::string& filename, const Pose3d& pose) {
 
 int main()
 {
-    ceres::Problem problem;
     vector<vector<cv::Point2d>> point_in_img;
     vector<vector<cv::Point3d> > point_in_world;
     double* intr_param;
@@ -376,6 +375,7 @@ int main()
     int iretation_index = 0;
     while(iretation_index<5)
     {
+        ceres::Problem problem;
         BuildOptimizationProblemTc2e(point_in_img, point_in_world, intr_param, T_e2b, T_c2e, T_w2b, &problem);
         CHECK(SolveOptimizationProblem(&problem))
           << "The solve was not successful, exiting.";
